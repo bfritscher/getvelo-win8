@@ -3,6 +3,14 @@
     width: 100%;
 }
 
+body {
+	background-color: #249bd3;
+}
+
+.count0{
+	color: red;
+}
+
 .fragment {
     /* Define a grid with rows for a banner and a body */
     -ms-grid-columns: 1fr;

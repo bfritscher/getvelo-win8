@@ -52,66 +52,105 @@
             display: inline-block;
         }
 
-        .groupeditemspage .groupeditemslist .group-header .group-chevron {
+        .groupeditemspage .groupeditemslist .group-chevron {
             -ms-grid-column: 3;
             display: inline-block;
         }
 
-            .groupeditemspage .groupeditemslist .group-header .group-chevron::before {
+            .groupeditemspage .groupeditemslist .group-chevron::before {
                 content: "\E26B";
                 font-family: 'Segoe UI Symbol';
             }
 
-            .groupeditemspage .groupeditemslist.win-rtl .group-header .group-chevron:before {
+            .groupeditemspage .groupeditemslist.win-rtl .group-chevron:before {
                 content: "\E26C";
             }
 
     .groupeditemspage .groupeditemslist .item {
-        -ms-grid-columns: 1fr;
-        -ms-grid-rows: 1fr 90px;
+        -ms-grid-rows: 1fr 21px;
+        -ms-grid-columns: 1fr 50px 50px;
         display: -ms-grid;
-        height: 250px;
+        padding: 15px 5px 5px 5px;
         width: 250px;
+        height: 60px;
     }
 
-        .groupeditemspage .groupeditemslist .item .item-image {
-            -ms-grid-row-span: 2;
-        }
+    .groupeditemspage .groupeditemslist .item .item-title {
+        -ms-grid-row: 1;
+        -ms-grid-column: 1;
+        overflow: hidden;
+        font-weight: bold;
+    }
 
-        .groupeditemspage .groupeditemslist .item .item-overlay {
-            -ms-grid-row: 2;
-            -ms-grid-rows: 1fr 21px;
-            display: -ms-grid;
-            padding: 6px 15px 2px 15px;
-        }
+    .groupeditemspage .groupeditemslist .item .item-subtitle {
+        -ms-grid-row: 2;
+        -ms-grid-column: 1;
+    }
+    .groupeditemspage .groupeditemslist .item .item-bikes {
+        -ms-grid-row: 1;
+        -ms-grid-column: 2;
+        text-align: center;
+        font-size: 180%;
+    }
+    .groupeditemspage .groupeditemslist .item .item-bikes-logo {
+        -ms-grid-row: 2;
+        -ms-grid-column: 2;
+        text-align: center;
+    }
+    .groupeditemspage .groupeditemslist .item .item-racks {
+        -ms-grid-row: 1;
+        -ms-grid-column: 3;
+        text-align: center;
+        font-size: 180%;
+    }
+    .groupeditemspage .groupeditemslist .item .item-racks-logo {
+        -ms-grid-row: 2;
+        -ms-grid-column: 3;
+        text-align: center;
+    }	
+    
+#zoomedOutListView .win-surface {
+    margin-left: 120px;	
+    margin-top: 200px;
+}
 
-            .groupeditemspage .groupeditemslist .item .item-overlay .item-title {
-                -ms-grid-row: 1;
-                overflow: hidden;
-                width: 220px;
-            }
+#zoomedOutListView .win-container {
+    background: #249bd3;	   
+} 
+.groupeditemspage #zoomedOutListView.groupeditemslist .item {
+    border-bottom: 1px solid #fff;
+    border-right: 1px solid #fff;
+    height: 65px;
+    margin-bottom: 60px;
+    margin-right: 40px;
+    width: 350px
+}
 
-            .groupeditemspage .groupeditemslist .item .item-overlay .item-subtitle {
-                -ms-grid-row: 2;
-                width: 220px;
-            }
+.groupeditemspage #zoomedOutListView.groupeditemslist .item .item-title,
+.groupeditemspage #zoomedOutListView.groupeditemslist .item .group-chevron{
+    font-size: 20pt;
+    font-weight: 400;
+    line-height: 1.5;
+}
 
 @media screen and (-ms-view-state: fullscreen-landscape), screen and (-ms-view-state: fullscreen-portrait), screen and (-ms-view-state: filled) {
-    .groupeditemspage .groupeditemslist .item .item-overlay {
-        background: rgba(0,0,0,0.65);
+    .groupeditemspage .groupeditemslist .item {
+        background: #249bd3;
+        border-bottom: 1px solid;
+        
     }
 
-        .groupeditemspage .groupeditemslist .item .item-overlay .item-title {
+        .groupeditemspage .groupeditemslist .item .item-title {
             color: rgba(255,255,255,0.87);
         }
 
-        .groupeditemspage .groupeditemslist .item .item-overlay .item-subtitle {
+        .groupeditemspage .groupeditemslist .item .item-subtitle {
             color: rgba(255,255,255,0.6);
         }
 }
 
 @media screen and (-ms-view-state: fullscreen-landscape) and (-ms-high-contrast), screen and (-ms-view-state: fullscreen-portrait) and (-ms-high-contrast), screen and (-ms-view-state: filled) and (-ms-high-contrast) {
-    .groupeditemspage .groupeditemslist .item .item-overlay {
+    .groupeditemspage .groupeditemslist .item {
         color: WindowText;
     }
 }
@@ -129,9 +168,11 @@
 
     .groupeditemspage .groupeditemslist .win-container {
         margin-bottom: 15px;
-        margin-left: 13px;
+        margin-left: 20px;
         margin-right: 35px;
-        padding: 7px;
+        border-bottom: 1px solid #fff;
+        border-right: 1px solid #fff;
+        background: #249bd3;
     }
 
     .groupeditemspage .groupeditemslist.win-rtl .win-container {
@@ -139,40 +180,19 @@
         margin-right: 26px;
     }
 
-    .groupeditemspage .groupeditemslist .item {
-        -ms-grid-columns: 60px 10px 1fr;
-        -ms-grid-rows: 1fr;
-        display: -ms-grid;
-        height: 60px;
-        width: 272px;
-    }
-
-        .groupeditemspage .groupeditemslist .item .item-image {
-            -ms-grid-column: 1;
-            -ms-grid-row-span: 1;
-            height: 60px;
-            width: 60px;
+        .groupeditemspage .groupeditemslist .item {
+            -ms-grid-rows: 1fr;
+            -ms-grid-columns: 1fr 0 30px;
+            padding: 15px 0 0 15px;
+            margin-bottom: 5px;
+            height: 40px;
         }
-
-        .groupeditemspage .groupeditemslist .item .item-overlay {
-            -ms-grid-column: 3;
-            -ms-grid-row: 1;
-            -ms-grid-row-align: stretch;
-            background: transparent;
-            display: inline-block;
-            padding: 0;
+        .groupeditemspage .groupeditemslist .item .item-title, 
+        .groupeditemspage .groupeditemslist .item .group-chevron {
+            font-size: 18pt;
+            font-weight: 400;
+            line-height: 1.5;
         }
-
-            .groupeditemspage .groupeditemslist .item .item-overlay .item-title {
-                margin-top: 4px;
-                max-height: 40px;
-                width: 202px;
-            }
-
-            .groupeditemspage .groupeditemslist .item .item-overlay .item-subtitle {
-                opacity: 0.6;
-                width: 202px;
-            }
 }
 
 @media screen and (-ms-view-state: fullscreen-portrait) {

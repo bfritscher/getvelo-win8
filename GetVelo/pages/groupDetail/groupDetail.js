@@ -19,7 +19,7 @@
                 function groupDataSelector(item) { return group; }
             );
 
-            element.querySelector("header[role=banner] .pagetitle").textContent = group.title;
+            element.querySelector("header[role=banner] .pagetitle").textContent = group.name;
 
             listView.itemDataSource = pageList.dataSource;
             listView.itemTemplate = element.querySelector(".itemtemplate");

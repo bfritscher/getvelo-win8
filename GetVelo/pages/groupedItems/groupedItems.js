@@ -6,6 +6,44 @@
     var nav = WinJS.Navigation;
     var ui = WinJS.UI;
 
+	function myTemplatingFunctionWithBindings(itemPromise) {
+ 
+	  //could have been done once elsewhere
+	  var itemtemplate = document.querySelector(".itemtemplate");
+	  var placeholder = document.createElement("div");
+ 
+	  //Wait for the item
+	  var renderCompletePromise =
+		itemPromise.then(function (item) {
+ 
+		  //use the item template
+		  return itemtemplate
+ 
+			 //wrap the retrieved value for instant access
+			.renderItem(WinJS.Promise.wrap(item))
+			.renderComplete
+ 
+			//Extend the rendercomplete promise
+			.then(function (renderedElement) {
+			  //do something depending of the data
+			  if (item.data.bikes == 0) {
+				WinJS.Utilities.addClass(renderedElement.querySelector('.item-bikes'), "count0");
+			  }
+			  if (item.data.racks == 0) {
+				WinJS.Utilities.addClass(renderedElement.querySelector('.item-racks'), "count0");
+			  }
+			placeholder.appendChild(renderedElement);
+           
+			});
+		});
+ 
+	  var toReturn = {
+		element: placeholder,
+		renderComplete: renderCompletePromise
+	  }
+	  return toReturn;
+	}
+
     ui.Pages.define("/pages/groupedItems/groupedItems.html", {
         // Navigates to the groupHeaderPage. Called from the groupHeaders,
         // keyboard shortcut and iteminvoked.
@@ -16,31 +54,40 @@
         // This function is called whenever a user navigates to this page. It
         // populates the page elements with the app's data.
         ready: function (element, options) {
-            var listView = element.querySelector(".groupeditemslist").winControl;
-            listView.groupHeaderTemplate = element.querySelector(".headertemplate");
-            listView.itemTemplate = element.querySelector(".itemtemplate");
-            listView.oniteminvoked = this._itemInvoked.bind(this);
+            var semanticZoom = element.querySelector("#zoom").winControl;
+            var zoomedInListView = element.querySelector("#zoomedInListView").winControl;
+            var zoomedOutListView = element.querySelector("#zoomedOutListView").winControl;
+
+            zoomedOutListView.itemTemplate = element.querySelector(".grouptemplate");
+            zoomedOutListView.itemDataSource = Data.groups.dataSource;
+            zoomedOutListView.groupDataSource = null;
+            zoomedOutListView.layout = new ui.GridLayout({ groupHeaderPosition: "top",  maxRows:3});
+
+            zoomedInListView.groupHeaderTemplate = element.querySelector(".headertemplate");
+            zoomedInListView.oniteminvoked = this._itemInvoked.bind(this);
 
             // Set up a keyboard shortcut (ctrl + alt + g) to navigate to the
             // current group when not in snapped mode.
-            listView.addEventListener("keydown", function (e) {
+            zoomedInListView.addEventListener("keydown", function (e) {
                 if (appView.value !== appViewState.snapped && e.ctrlKey && e.keyCode === WinJS.Utilities.Key.g && e.altKey) {
-                    var data = listView.itemDataSource.list.getAt(listView.currentItem.index);
+                    var data = zoomedInListView.itemDataSource.list.getAt(listView.currentItem.index);
                     this.navigateToGroup(data.group.key);
                     e.preventDefault();
                     e.stopImmediatePropagation();
                 }
             }.bind(this), true);
 
-            this._initializeLayout(listView, appView.value);
-            listView.element.focus();
+            this._initializeLayout(zoomedInListView, appView.value, element);
+            semanticZoom.element.focus();
         },
 
         // This function updates the page layout in response to viewState changes.
         updateLayout: function (element, viewState, lastViewState) {
             /// <param name="element" domElement="true" />
+            var zoomedInListView = element.querySelector("#zoomedInListView").winControl;
+            this._initializeLayout(zoomedInListView, viewState, element);
 
-            var listView = element.querySelector(".groupeditemslist").winControl;
+           /*
             if (lastViewState !== viewState) {
                 if (lastViewState === appViewState.snapped || viewState === appViewState.snapped) {
                     var handler = function (e) {
@@ -48,23 +95,31 @@
                         e.preventDefault();
                     }
                     listView.addEventListener("contentanimating", handler, false);
-                    this._initializeLayout(listView, viewState);
+                    //this._initializeLayout(listView, viewState, element);
                 }
             }
+            */
         },
 
         // This function updates the ListView with new layouts
-        _initializeLayout: function (listView, viewState) {
+        _initializeLayout: function (zoomedInListView, viewState, element) {
             /// <param name="listView" value="WinJS.UI.ListView.prototype" />
 
+            var semanticZoom = element.querySelector("#zoom").winControl;
+
             if (viewState === appViewState.snapped) {
-                listView.itemDataSource = Data.groups.dataSource;
-                listView.groupDataSource = null;
-                listView.layout = new ui.ListLayout();
+                zoomedInListView.itemTemplate = element.querySelector(".grouptemplate");
+                zoomedInListView.itemDataSource = Data.groups.dataSource;
+                zoomedInListView.groupDataSource = null;
+                zoomedInListView.layout = new ui.ListLayout();
+                semanticZoom.zoomedOut = false;
+                semanticZoom.locked = true;
             } else {
-                listView.itemDataSource = Data.items.dataSource;
-                listView.groupDataSource = Data.groups.dataSource;
-                listView.layout = new ui.GridLayout({ groupHeaderPosition: "top" });
+                zoomedInListView.itemTemplate = myTemplatingFunctionWithBindings;
+                zoomedInListView.itemDataSource = Data.items.dataSource;
+                zoomedInListView.groupDataSource = Data.groups.dataSource;
+                zoomedInListView.layout = new ui.GridLayout({ groupHeaderPosition: "top" });
+                semanticZoom.locked = false;
             }
         },
 
