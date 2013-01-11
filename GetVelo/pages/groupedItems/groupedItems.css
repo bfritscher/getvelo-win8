@@ -66,48 +66,7 @@
                 content: "\E26C";
             }
 
-    .groupeditemspage .groupeditemslist .item {
-        -ms-grid-rows: 1fr 21px;
-        -ms-grid-columns: 1fr 50px 50px;
-        display: -ms-grid;
-        padding: 15px 5px 5px 5px;
-        width: 250px;
-        height: 60px;
-    }
 
-    .groupeditemspage .groupeditemslist .item .item-title {
-        -ms-grid-row: 1;
-        -ms-grid-column: 1;
-        overflow: hidden;
-        font-weight: bold;
-    }
-
-    .groupeditemspage .groupeditemslist .item .item-subtitle {
-        -ms-grid-row: 2;
-        -ms-grid-column: 1;
-    }
-    .groupeditemspage .groupeditemslist .item .item-bikes {
-        -ms-grid-row: 1;
-        -ms-grid-column: 2;
-        text-align: center;
-        font-size: 180%;
-    }
-    .groupeditemspage .groupeditemslist .item .item-bikes-logo {
-        -ms-grid-row: 2;
-        -ms-grid-column: 2;
-        text-align: center;
-    }
-    .groupeditemspage .groupeditemslist .item .item-racks {
-        -ms-grid-row: 1;
-        -ms-grid-column: 3;
-        text-align: center;
-        font-size: 180%;
-    }
-    .groupeditemspage .groupeditemslist .item .item-racks-logo {
-        -ms-grid-row: 2;
-        -ms-grid-column: 3;
-        text-align: center;
-    }	
     
 #zoomedOutListView .win-surface {
     margin-left: 120px;	
@@ -139,14 +98,6 @@
         border-bottom: 1px solid;
         
     }
-
-        .groupeditemspage .groupeditemslist .item .item-title {
-            color: rgba(255,255,255,0.87);
-        }
-
-        .groupeditemspage .groupeditemslist .item .item-subtitle {
-            color: rgba(255,255,255,0.6);
-        }
 }
 
 @media screen and (-ms-view-state: fullscreen-landscape) and (-ms-high-contrast), screen and (-ms-view-state: fullscreen-portrait) and (-ms-high-contrast), screen and (-ms-view-state: filled) and (-ms-high-contrast) {

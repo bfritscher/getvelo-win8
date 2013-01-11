@@ -4,12 +4,136 @@
 }
 
 body {
-	background-color: #249bd3;
+    background-color: #249bd3;
 }
 
 .count0{
-	color: red;
+    color: red;
 }
+
+.count1{
+    color: orange;
+}
+
+
+#progressOverlay{
+    top: 0;
+    left: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    overflow:hidden;
+}
+
+#progressOverlay .movingBikeProgress{
+    width: 800px;
+    height: 100px;
+    position:relative;
+    top:50%;
+    margin: auto;
+}
+
+#progressOverlay .movingBikeProgress .leftRack{
+    width: 31px;
+    height: 102px;
+    position:absolute;
+    left:0;
+    bottom: 0;
+    background: url('/images/rack.png') no-repeat no-repeat;
+    transform: scaleX(-1);
+}
+
+#progressOverlay .movingBikeProgress .rightRack{
+    width: 31px;
+    height: 102px;
+    position:absolute;
+    right:0;
+    bottom: 0;
+    background: url('/images/rack.png') no-repeat no-repeat;
+}
+
+#progressOverlay .movingBikeProgress .movingBike{
+    width: 177px;
+    height: 156px;
+    position:absolute;
+    bottom: 0;
+    animation-name: movingBike;
+    animation-duration:4s;
+    animation-delay: 0;
+    animation-iteration-count:infinite;
+    animation-direction:normal;
+    animation-timing-function:  ease-in-out;
+    background: url('/images/bike.png') no-repeat no-repeat;
+    margin-left: -100px;
+}
+
+@keyframes movingBike{
+    0%{
+        left: 0px;
+        transform: scaleX(1);
+    }
+    49.9%{
+        left: 100%;
+        transform: scaleX(1);
+    }
+    50%{
+        left: 100%;
+        transform: scaleX(-1);
+    }
+
+    100%{
+        left: 0px;
+        transform: scaleX(-1);
+    }
+}
+
+ .item {
+        -ms-grid-rows: 1fr 21px;
+        -ms-grid-columns: 1fr 50px 50px;
+        display: -ms-grid;
+        padding: 15px 5px 5px 5px;
+        width: 250px;
+        height: 60px;
+    }
+
+ .offline .item {
+    color: red;
+ }
+
+ .item .item-title {
+        -ms-grid-row: 1;
+        -ms-grid-column: 1;
+        overflow: hidden;
+        font-weight: bold;
+    }
+
+ .item .item-subtitle {
+        -ms-grid-row: 2;
+        -ms-grid-column: 1;
+    }
+.item .item-bikes {
+        -ms-grid-row: 1;
+        -ms-grid-column: 2;
+        text-align: center;
+        font-size: 180%;
+    }
+ .item .item-bikes-logo {
+        -ms-grid-row: 2;
+        -ms-grid-column: 2;
+        text-align: center;
+    }
+.item .item-racks {
+        -ms-grid-row: 1;
+        -ms-grid-column: 3;
+        text-align: center;
+        font-size: 180%;
+    }
+.item .item-racks-logo {
+        -ms-grid-row: 2;
+        -ms-grid-column: 3;
+        text-align: center;
+    }	
 
 .fragment {
     /* Define a grid with rows for a banner and a body */

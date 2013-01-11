@@ -21,33 +21,33 @@
         return s;
     }
 
-    loadNetworks();
-    function loadNetworks() {
+    function loadNetworks(callback) {
         var requestStr = "http://192.168.100.40/velopass.php";
         WinJS.xhr({ url: requestStr }).then(
             //Callback for success
             function (request) {
-                var networks = JSON.parse(request.responseText);
-                // Verify if the service has returned
-                if (networks !== undefined) {
-                    networks.forEach(function (network){
-                        network.stations.forEach(function (station) {
-                            station.network = network;
-                            list.push(station);
+                try{
+                    var networks = JSON.parse(request.responseText);
+                    // Verify if the service has returned
+                        networks.forEach(function (network){
+                            network.stations.forEach(function (station) {
+                                station.network = network;
+                                list.push(station);
+                            });
                         });
-                    });
-                    list.sort(sortStations);
-                } else {
-                    WinJS.log && WinJS.log("Error fetching results", "sample", "error");
+                        list.sort(sortStations);
+                        if (typeof callback == "function") {
+                            callback();
+                        }
+                } catch(e) {
+                    var md = new Windows.UI.Popups.MessageDialog("Error fetching data from the service: " + e.message);
+                    md.showAsync();
                 }
             },
             // Called if the XHR fails
              function (request) {
-                 if (request.status === 401) {
-                     WinJS.log && WinJS.log(request.statusText, "sample", "error");
-                 } else {
-                     WinJS.log && WinJS.log("Error fetching data from the service. " + request.responseText, "sample", "error");
-                 }
+                 var md = new Windows.UI.Popups.MessageDialog("Error fetching data from the service: " + request.responseText);
+                 md.showAsync();
              });
     }
 
@@ -58,7 +58,8 @@
         getItemReference: getItemReference,
         getItemsFromGroup: getItemsFromGroup,
         resolveGroupReference: resolveGroupReference,
-        resolveItemReference: resolveItemReference
+        resolveItemReference: resolveItemReference,
+        load: loadNetworks
     });
 
     // Get a reference for an item, using the group key and item title as a

@@ -6,44 +6,6 @@
     var nav = WinJS.Navigation;
     var ui = WinJS.UI;
 
-	function myTemplatingFunctionWithBindings(itemPromise) {
- 
-	  //could have been done once elsewhere
-	  var itemtemplate = document.querySelector(".itemtemplate");
-	  var placeholder = document.createElement("div");
- 
-	  //Wait for the item
-	  var renderCompletePromise =
-		itemPromise.then(function (item) {
- 
-		  //use the item template
-		  return itemtemplate
- 
-			 //wrap the retrieved value for instant access
-			.renderItem(WinJS.Promise.wrap(item))
-			.renderComplete
- 
-			//Extend the rendercomplete promise
-			.then(function (renderedElement) {
-			  //do something depending of the data
-			  if (item.data.bikes == 0) {
-				WinJS.Utilities.addClass(renderedElement.querySelector('.item-bikes'), "count0");
-			  }
-			  if (item.data.racks == 0) {
-				WinJS.Utilities.addClass(renderedElement.querySelector('.item-racks'), "count0");
-			  }
-			placeholder.appendChild(renderedElement);
-           
-			});
-		});
- 
-	  var toReturn = {
-		element: placeholder,
-		renderComplete: renderCompletePromise
-	  }
-	  return toReturn;
-	}
-
     ui.Pages.define("/pages/groupedItems/groupedItems.html", {
         // Navigates to the groupHeaderPage. Called from the groupHeaders,
         // keyboard shortcut and iteminvoked.
@@ -115,7 +77,7 @@
                 semanticZoom.zoomedOut = false;
                 semanticZoom.locked = true;
             } else {
-                zoomedInListView.itemTemplate = myTemplatingFunctionWithBindings;
+                zoomedInListView.itemTemplate = Helper.stationItemTemplate;
                 zoomedInListView.itemDataSource = Data.items.dataSource;
                 zoomedInListView.groupDataSource = Data.groups.dataSource;
                 zoomedInListView.layout = new ui.GridLayout({ groupHeaderPosition: "top" });

@@ -11,7 +11,6 @@
 
     <link href="/css/default.css" rel="stylesheet" />
     <link href="/pages/itemDetail/itemDetail.css" rel="stylesheet" />
-    <script src="/js/data.js"></script>
     <script src="/pages/itemDetail/itemDetail.js"></script>
 </head>
 <body>
@@ -24,16 +23,18 @@
             </h1>
         </header>
         <div class="content" aria-label="Main content" role="main">
-            <article>
-                <div>
-                    <header>
-                        <h2 class="item-title"></h2>
-                        <h4 class="item-subtitle"></h4>
-                    </header>
-                    <img class="item-image" src="#" />
-                    <div class="item-content"></div>
-                </div>
-            </article>
+            <div class="item">
+                <h2 class="item-title"></h2>
+                <h4 class="item-subtitle"></h4>
+				<div class="item-bikes" data-win-bind="textContent: bikes"></div>
+				<div class="item-bikes-logo">▲</div>
+				<div class="item-racks" data-win-bind="textContent: racks"></div>
+				<div class="item-racks-logo">▼</div>
+            </div>
+			<div class="item-content"></div>
+			<div class="mapBox">
+				<div id="mapDiv"></div>				
+			</div>
         </div>
     </div>
 </body>

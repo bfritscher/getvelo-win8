@@ -1,83 +1,110 @@
 ﻿.itemdetailpage .content {
     -ms-grid-row: 1;
     -ms-grid-row-span: 2;
-    display: block;
-    height: 100%;
-    overflow-x: auto;
-    position: relative;
-    width: 100%;
-    z-index: 0;
+    display: -ms-grid;
+	-ms-grid-rows: auto auto 1fr;
+	-ms-grid-columns: 1fr;
+	padding-top: 133px;
+	margin-left: 120px;
+    margin-right: 120px;
 }
 
-    .itemdetailpage .content article {
-        /* Define a multi-column, horizontally scrolling article by default. */
-        column-fill: auto;
-        column-gap: 80px;
-        column-width: 480px;
-        height: calc(100% - 183px);
-        margin-left: 120px;
-        margin-right: 120px;
-        margin-top: 133px;
-        width: 480px;
-    }
+.itemdetailpage .content .item{
+	display:-ms-grid;
+	-ms-grid-rows: 1fr 21px;
+	-ms-grid-columns: auto 50px 50px auto;
+	-ms-grid-row: 1;
+	width:100%;
+	}
 
-        .itemdetailpage .content article header .item-title {
-            margin-bottom: 19px;
+        .itemdetailpage .content .item .item-title {
+			-ms-grid-column:1;
+			-ms-grid-row:1;
+			padding-right: 50px;
         }
 
-        .itemdetailpage .content article header .item-subtitle {
-            margin-bottom: 16px;
-            margin-top: 0;
+        .itemdetailpage .content .item .item-subtitle {
+			-ms-grid-column:1;
+			-ms-grid-row:2;
+			
         }
+				
+		
+		.itemdetailpage .content .item-content {
+			line-height: 80px;
+			margin-top: 30px;
+			margin-bottom: 20px;
+			-ms-grid-row: 2;
+		}
+		.itemdetailpage .content .item-content > div{
+			background-repeat: no-repeat no-repeat;
+			background-position: bottom center;
+			display: inline-block;
+			width: 80px;
+			height: 80px;
+		}
+		
+		.itemdetailpage .content .item-content > div.rack0{
+			background-image: url('/images/rack.png');
+			background-size: 12px;
+		}
+		
+		.itemdetailpage .content .item-content > div.rack4{
+			background-image: url('/images/bike.png');
+			background-size: 70px;
+		}
+		
+		.itemdetailpage .content .item-content > div.rackx{
+			border-bottom: 1px solid #fff;
+		}
+		
+		.mapBox {
+			position:relative;
+			-ms-grid-row: 3;
+			margin: 25px 0;
+		}
 
-        .itemdetailpage .content article .item-image {
-            height: 240px;
-            width: 460px;
-        }
-
-        .itemdetailpage .content article .item-content p {
-            margin-top: 10px;
-            margin-bottom: 20px;
-        }
-
+		
 @media screen and (-ms-view-state: snapped) {
     .itemdetailpage .content {
         -ms-grid-row: 2;
         -ms-grid-row-span: 1;
         overflow-x: hidden;
         overflow-y: auto;
+		padding-top: 0;
+		margin-left: 25px;
+		margin-right: 25px;
     }
+	
+		.itemdetailpage .content .item-content {
+			line-height: 30px;
+		}
+	
+	.itemdetailpage .content .item-content > div{
+		width: 35px;
+		height: 35px;
+	}
+	
+	.itemdetailpage .content .item-content > div.rack0{
+			background-size: 6px;
+		}
+		
+		.itemdetailpage .content .item-content > div.rack4{
+			background-size: 28px;
+		}
+		
 
-        .itemdetailpage .content article {
-            /* Define a single column, vertically scrolling article in snapped mode. */
-            -ms-grid-columns: 300px 1fr;
-            -ms-grid-row: 2;
-            -ms-grid-rows: auto 60px;
-            display: -ms-grid;
-            height: 100%;
-            margin-left: 20px;
-            margin-right: 20px;
-            margin-top: 6px;
-            width: 280px;
-        }
-
-            .itemdetailpage .content article header .item-title {
+            .itemdetailpage .content header .item-title {
                 margin-bottom: 10px;
             }
 
-            .itemdetailpage .content article .item-image {
-                height: 140px;
-                width: 280px;
-            }
-
-            .itemdetailpage .content article .item-content {
-                padding-bottom: 60px;
-                width: 280px;
+            .itemdetailpage .content  .item-content {
+                padding-bottom: 20px;
             }
 }
 
 @media screen and (-ms-view-state: fullscreen-portrait) {
-    .itemdetailpage .content article {
+    .itemdetailpage .content  {
         margin-left: 100px;
         margin-right: 100px;
     }

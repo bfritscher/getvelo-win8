@@ -9,13 +9,34 @@
     <script src="//Microsoft.WinJS.1.0/js/base.js"></script>
     <script src="//Microsoft.WinJS.1.0/js/ui.js"></script>
 
+    <!-- Bing Map Control references -->
+    <script type="text/javascript" src="ms-appx:///Bing.Maps.JavaScript//js/veapicore.js"></script>
+
     <!-- GetVelo references -->
     <link href="/css/default.css" rel="stylesheet" />
     <script src="/js/data.js"></script>
     <script src="/js/navigator.js"></script>
+    <script src="/js/map.js"></script>
     <script src="/js/default.js"></script>
 </head>
 <body>
+     <div class="stationItemTemplate" data-win-control="WinJS.Binding.Template">
+        <div class="item">
+            <h4 class="item-title" data-win-bind="textContent: name"></h4>
+            <h6 class="item-subtitle win-type-ellipsis" data-win-bind="textContent: city"></h6>
+            <div class="item-bikes" data-win-bind="textContent: bikes"></div>
+            <div class="item-bikes-logo">▲</div>
+            <div class="item-racks" data-win-bind="textContent: racks"></div>
+            <div class="item-racks-logo">▼</div>
+        </div>
+    </div>
+    <div id="progressOverlay" style="display:none;">
+        <div class="movingBikeProgress">
+            <div class="movingBike"></div>
+            <div class="leftRack"></div>
+            <div class="rightRack"></div>
+        </div>
+    </div>
     <div id="contenthost" data-win-control="Application.PageControlNavigator" data-win-options="{home: '/pages/groupedItems/groupedItems.html'}"></div>
     <!-- <div id="appbar" data-win-control="WinJS.UI.AppBar">
         <button data-win-control="WinJS.UI.AppBarCommand" data-win-options="{id:'cmd', label:'Command', icon:'placeholder'}" type="button"></button>

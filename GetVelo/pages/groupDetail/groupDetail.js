@@ -15,19 +15,20 @@
             var group = (options && options.groupKey) ? Data.resolveGroupReference(options.groupKey) : Data.groups.getAt(0);
             this._items = Data.getItemsFromGroup(group);
             var pageList = this._items.createGrouped(
-                function groupKeySelector(item) { return group.key; },
+                function groupKeySelector(item) { return group.id; },
                 function groupDataSelector(item) { return group; }
             );
 
             element.querySelector("header[role=banner] .pagetitle").textContent = group.name;
 
             listView.itemDataSource = pageList.dataSource;
-            listView.itemTemplate = element.querySelector(".itemtemplate");
-            listView.groupDataSource = pageList.groups.dataSource;
-            listView.groupHeaderTemplate = element.querySelector(".headertemplate");
+            listView.itemTemplate = Helper.stationItemTemplate;
             listView.oniteminvoked = this._itemInvoked.bind(this);
 
             this._initializeLayout(listView, Windows.UI.ViewManagement.ApplicationView.value);
+
+            Map.create(element.querySelector("#mapDiv"), group.stations);
+
             listView.element.focus();
         },
 
