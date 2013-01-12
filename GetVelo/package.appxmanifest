@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest">
-  <Identity Name="aa944ac9-864c-41f5-890b-c7234672bdcb" Version="1.0.0.0" Publisher="CN=Boris" />
+  <Identity Name="21062BorisFritscher.GetVelo" Version="1.0.0.0" Publisher="CN=01B08AD2-A707-40F9-B4EC-5DD803BB4E0F" />
   <Properties>
     <DisplayName>GetVelo</DisplayName>
-    <PublisherDisplayName>Boris</PublisherDisplayName>
+    <PublisherDisplayName>Boris Fritscher</PublisherDisplayName>
     <Logo>images\storelogo.png</Logo>
   </Properties>
   <Prerequisites>
@@ -16,7 +16,7 @@
   <Applications>
     <Application Id="App" StartPage="default.html">
       <VisualElements DisplayName="GetVelo" Logo="images\logo.png" SmallLogo="images\smalllogo.png" Description="GetVelo" ForegroundText="light" BackgroundColor="#249bd3">
-        <DefaultTile ShowName="allLogos" ShortName="GetVelo" />
+        <DefaultTile ShowName="allLogos" ShortName="GetVelo" WideLogo="images\logowide.png" />
         <SplashScreen Image="images\splashscreen.png" />
       </VisualElements>
       <Extensions>
@@ -25,7 +25,6 @@
     </Application>
   </Applications>
   <Capabilities>
-    <Capability Name="privateNetworkClientServer" />
     <Capability Name="internetClient" />
   </Capabilities>
 </Package>

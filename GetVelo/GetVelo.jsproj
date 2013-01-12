@@ -46,18 +46,20 @@
   <PropertyGroup>
     <TargetPlatformIdentifier>Windows</TargetPlatformIdentifier>
     <TargetPlatformVersion>8.0</TargetPlatformVersion>
-    <DefaultLanguage>en-US</DefaultLanguage>
-    <PackageCertificateKeyFile>GetVelo_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <DefaultLanguage>fr-CH</DefaultLanguage>
+    <PackageCertificateKeyFile>GetVelo_StoreKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateThumbprint>9454DF37333BF0506364B177D72919C93BE2B730</PackageCertificateThumbprint>
+    <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
   </PropertyGroup>
   <ItemGroup>
     <AppxManifest Include="package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
     <Content Include="css\default.css" />
+    <None Include="GetVelo_StoreKey.pfx" />
     <Content Include="images\bike.png" />
-    <Content Include="images\logo-270.png" />
-    <Content Include="images\logo.scale-100.png" />
-    <Content Include="images\logo.scale-180.png" />
+    <Content Include="images\logo.png" />
+    <Content Include="images\logowide.png" />
     <Content Include="images\pushpin.png" />
     <Content Include="images\rack.png" />
     <Content Include="images\smalllogo.png" />
@@ -67,6 +69,7 @@
     <Content Include="js\default.js" />
     <Content Include="js\navigator.js" />
     <Content Include="js\map.js" />
+    <None Include="Package.StoreAssociation.xml" />
     <Content Include="pages\itemDetail\itemDetail.css" />
     <Content Include="pages\itemDetail\itemDetail.html" />
     <Content Include="pages\itemDetail\itemDetail.js" />

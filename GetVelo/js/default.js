@@ -10,7 +10,7 @@
     var nav = WinJS.Navigation;
 
     WinJS.Namespace.define("Helper", {
-        apiUrl: "http://192.168.100.40/velopass.php",
+        apiUrl: "http://www.fritscher.ch/getvelo/velopass.php",
         setWarningClass: function setWarningClass(element, value) {
             if (value < 2) {
                 WinJS.Utilities.addClass(element, "count" + value);
