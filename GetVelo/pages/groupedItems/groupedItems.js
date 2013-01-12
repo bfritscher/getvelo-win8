@@ -41,6 +41,7 @@
 
             this._initializeLayout(zoomedInListView, appView.value, element);
             semanticZoom.element.focus();
+            Windows.ApplicationModel.Search.SearchPane.getForCurrentView().showOnKeyboardInput = true;
         },
 
         // This function updates the page layout in response to viewState changes.
@@ -48,6 +49,8 @@
             /// <param name="element" domElement="true" />
             var zoomedInListView = element.querySelector("#zoomedInListView").winControl;
             this._initializeLayout(zoomedInListView, viewState, element);
+
+
 
            /*
             if (lastViewState !== viewState) {
@@ -61,6 +64,11 @@
                 }
             }
             */
+        },
+
+        unload: function () {
+            // Turn off type to search.
+            Windows.ApplicationModel.Search.SearchPane.getForCurrentView().showOnKeyboardInput = false;
         },
 
         // This function updates the ListView with new layouts

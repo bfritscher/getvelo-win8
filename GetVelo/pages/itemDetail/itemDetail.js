@@ -2,6 +2,8 @@
     "use strict";
 
     var nav = WinJS.Navigation;
+    var start = Windows.UI.StartScreen;
+    var notifications = Windows.UI.Notifications;
 
     WinJS.UI.Pages.define("/pages/itemDetail/itemDetail.html", {
         // This function is called whenever a user navigates to this page. It
@@ -37,8 +39,37 @@
                 content.appendChild(div);
             }
 
-            
+            // Handle click events from the Pin command
+            var pinCmd = document.getElementById("pin");
+            pinCmd.winControl.hidden = false;
+            pinCmd.addEventListener("click", function (e) {
+                var uri = new Windows.Foundation.Uri("ms-appx:///");
 
+                var tile = new start.SecondaryTile(
+                    item.network.id + '.' + item.id,                                    // Tile ID
+                    item.name,                             // Tile short name
+                    item.name,                                  // Tile display name
+                    JSON.stringify(Data.getItemReference(item)), // Activation argument
+                    start.TileOptions.none,            // Tile options
+                    uri,
+                    uri// Tile logo URI
+                );
+
+                tile.requestCreateAsync().then(function (isCreated) {
+                    if (isCreated) {
+                        // Secondary tile successfully pinned.
+                        notifications.TileUpdateManager.createTileUpdaterForSecondaryTile(item.network.id + '.' + item.id).startPeriodicUpdate(new Windows.Foundation.Uri(Helper.apiUrl + '?action=tile&network=' + item.network.id + '&station=' + item.id),
+                            Windows.UI.Notifications.PeriodicUpdateRecurrence.halfHour);
+                    } else {
+                        // Secondary tile not pinned.
+                    }
+                });
+            });
+
+        },
+        unload: function () {
+            var pinCmd = document.getElementById("pin");
+            pinCmd.winControl.hidden = true;
         }
     });
 })();

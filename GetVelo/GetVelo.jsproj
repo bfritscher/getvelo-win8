@@ -77,6 +77,9 @@
     <Content Include="pages\groupedItems\groupedItems.html" />
     <Content Include="pages\groupedItems\groupedItems.js" />
     <Content Include="default.html" />
+    <Content Include="pages\search\search.css" />
+    <Content Include="pages\search\search.html" />
+    <Content Include="pages\search\search.js" />
     <None Include="GetVelo_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>

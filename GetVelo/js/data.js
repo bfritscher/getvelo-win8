@@ -2,6 +2,7 @@
     "use strict";
 
     var list = new WinJS.Binding.List();
+    var terms = [];
     var sortedList = list.createSorted(sortStations);
     var groupedItems = list.createGrouped(
         function groupKeySelector(station) { return station.network.name + '*' + station.network.id; },
@@ -21,18 +22,30 @@
         return s;
     }
 
+    function addTerm(term) {
+        term = term.toLowerCase();
+        if (terms.indexOf(term) == -1) {
+            terms.push(term);
+        }
+    }
+
     function loadNetworks(callback) {
-        var requestStr = "http://192.168.100.40/velopass.php";
+        var requestStr = Helper.apiUrl;
+        terms.splice(0, terms.length);
+        list.splice(0, list.length);
         WinJS.xhr({ url: requestStr }).then(
             //Callback for success
             function (request) {
                 try{
                     var networks = JSON.parse(request.responseText);
                     // Verify if the service has returned
-                        networks.forEach(function (network){
+                    networks.forEach(function (network) {
+                        addTerm(network.name);
                             network.stations.forEach(function (station) {
                                 station.network = network;
                                 list.push(station);
+                                addTerm(station.name);
+                                addTerm(station.city);
                             });
                         });
                         list.sort(sortStations);
@@ -59,7 +72,8 @@
         getItemsFromGroup: getItemsFromGroup,
         resolveGroupReference: resolveGroupReference,
         resolveItemReference: resolveItemReference,
-        load: loadNetworks
+        load: loadNetworks,
+        terms: terms
     });
 
     // Get a reference for an item, using the group key and item title as a
