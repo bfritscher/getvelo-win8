@@ -1,0 +1,5 @@
+Privacy Policy
+
+GetVelo uses your internet connection to download the bike availability information. That's it.
+
+GetVelo utilise votre connexion internet uniquement pour télécharger les informations de disponibilité des vélos. Rien d'autre.

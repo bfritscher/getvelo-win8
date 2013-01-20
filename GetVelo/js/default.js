@@ -52,24 +52,27 @@
                 renderComplete: renderCompletePromise
             }
             return toReturn;
-        }
+        },
+        fetchData: function fetchData(callback) {
+            var progress = WinJS.Utilities.query('#progressOverlay');
+            var contenthost = WinJS.Utilities.query('#contenthost');
 
+            progress.setStyle('display', 'block');
+            contenthost.setStyle('visibility', 'hidden');
+            setTimeout(function () {
+                Data.load(function () {
+                    progress.setStyle('display', 'none');
+                    contenthost.setStyle('visibility', 'visible');
+                    if (typeof callback == "function") {
+                        callback();
+                    }
+                });
+            }, 100);
+        }
     });
 
 
-    function fetchData() {
-        var progress = WinJS.Utilities.query('#progressOverlay');
-        var contenthost = WinJS.Utilities.query('#contenthost');
-        
-        progress.setStyle('display', 'block');
-        contenthost.setStyle('visibility', 'hidden');
-        setTimeout(function () {
-            Data.load(function () {
-                progress.setStyle('display', 'none');
-                contenthost.setStyle('visibility', 'visible');
-            });
-        }, 100);
-    }
+    
 
     app.addEventListener("activated", function (args) {
         if (args.detail.kind === activation.ActivationKind.launch) {
@@ -81,13 +84,14 @@
                 // Restore application state here.
             }
 
-            fetchData();
+            Helper.fetchData();
             if (app.sessionState.history) {
                 nav.history = app.sessionState.history;
             }
             args.setPromise(WinJS.UI.processAll().then(function () {
                 if (args.detail.arguments !== "") {
-                    nav.history.current.initialPlaceholder = true;
+                    //nav.history.current.initialPlaceholder = true;
+                    nav.history.current = { location: Application.navigator.home, initialState: {} };
                     return nav.navigate("/pages/itemDetail/itemDetail.html", { item: JSON.parse(args.detail.arguments) });
                 }
                 else if (nav.location) {
@@ -100,9 +104,17 @@
         }
     });
 
+    app.addEventListener("settings", function (e) {
+        var vector = e.detail.e.request.applicationCommands;
+        var cmd1 = new Windows.UI.ApplicationSettings.SettingsCommand("Privacy Policy", "Privacy Policy", function () {
+            window.open('http://www.fritscher.ch/getvelo/privacy');
+        });
+        vector.append(cmd1);
+    });
+
     app.addEventListener("ready", function () {
         document.getElementById("refresh").addEventListener("click", function (e) {
-            fetchData();
+            Helper.fetchData();
         });
     });
 

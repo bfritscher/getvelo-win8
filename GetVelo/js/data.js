@@ -100,10 +100,12 @@
     // Get a unique item from the provided string array, which should contain a
     // group key and an item title.
     function resolveItemReference(reference) {
-        for (var i = 0; i < groupedItems.length; i++) {
-            var item = groupedItems.getAt(i);
-            if (item.network.id === reference[0] && item.id === reference[1]) {
-                return item;
+        if (reference && reference.length >= 2) {
+            for (var i = 0; i < groupedItems.length; i++) {
+                var item = groupedItems.getAt(i);
+                if (item.network.id === reference[0] && item.id === reference[1]) {
+                    return item;
+                }
             }
         }
     }

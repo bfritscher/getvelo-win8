@@ -22,6 +22,15 @@
             listView.oniteminvoked = this._itemInvoked;
             this._handleQuery(element, options);
             listView.element.focus();
+            
+            if (Data.items.length == 0) {
+                var self = this;
+                Helper.fetchData(function () {
+                    nav.back(1).done(function () {
+                        nav.navigate(searchPageURI, options);
+                    });
+                });
+            }
         },
 
         // This function updates the page layout in response to viewState changes.
@@ -183,9 +192,8 @@
                 if (!nav.location) {
                     nav.history.current = { location: Application.navigator.home, initialState: {} };
                 }
-
                 return nav.navigate(searchPageURI, { queryText: args.detail.queryText });
-            }));
+           }));
         }
     });
 
