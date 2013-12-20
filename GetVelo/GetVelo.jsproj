@@ -49,7 +49,7 @@
     <DefaultLanguage>fr-CH</DefaultLanguage>
     <PackageCertificateKeyFile>GetVelo_StoreKey.pfx</PackageCertificateKeyFile>
     <PackageCertificateThumbprint>9454DF37333BF0506364B177D72919C93BE2B730</PackageCertificateThumbprint>
-    <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
+    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
   </PropertyGroup>
   <ItemGroup>
     <AppxManifest Include="package.appxmanifest">

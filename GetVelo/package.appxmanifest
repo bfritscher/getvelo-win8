@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest">
-  <Identity Name="21062BorisFritscher.GetVelo" Version="1.0.0.1" Publisher="CN=01B08AD2-A707-40F9-B4EC-5DD803BB4E0F" />
+  <Identity Name="21062BorisFritscher.GetVelo" Version="1.0.0.2" Publisher="CN=01B08AD2-A707-40F9-B4EC-5DD803BB4E0F" />
   <Properties>
     <DisplayName>GetVelo</DisplayName>
     <PublisherDisplayName>Boris Fritscher</PublisherDisplayName>
